@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repositories
 {
-	internal class GenericRepository<T> : IGenericRepository<T>
+	public class GenericRepository<T> : IGenericRepository<T>
 		where T : class
 	{
 		private readonly VtContext _context;
@@ -27,7 +27,7 @@ namespace DataLayer.Repositories
 			await _dbSet.AddAsync(entity);
 		}
 
-		public async Task<IEnumerable<T>> GetAllAsync()
+		public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter=null)
 		{
 			return await _dbSet.ToListAsync();
 		}
@@ -49,7 +49,7 @@ namespace DataLayer.Repositories
 			return entity;
 		}
 
-		public IQueryable<T> Where(Expression<Func<T, bool>> filter)
+		public IEnumerable<T> Where(Expression<Func<T, bool>> filter=null)
 		{
 			return _dbSet.Where(filter);
 		}

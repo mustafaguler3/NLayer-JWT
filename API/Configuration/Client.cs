@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreLayer.Configuration
+namespace API.Configuration
 {
 	public class Client
 	{

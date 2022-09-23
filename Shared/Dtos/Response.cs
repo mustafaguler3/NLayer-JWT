@@ -56,5 +56,10 @@ namespace Shared.Dtos
                 IsSuccessful = false
             };
         }
-    }
+
+		public static Response<IEnumerable<TDto>> Success<TDto>(IEnumerable<TDto> enumerable) where TDto : class
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

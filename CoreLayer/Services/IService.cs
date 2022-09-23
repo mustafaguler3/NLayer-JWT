@@ -14,14 +14,14 @@ namespace CoreLayer.Services
 	{
         Task<Response<TDto>> GetByIdAsync(int id);
 
-        Task<Response<IQueryable<TDto>>> GetAllAsync();
+        Task<Response<IEnumerable<TDto>>> GetAllAsync();
 
         Task<Response<IQueryable<TDto>>> Where(Expression<Func<T, bool>> filter);
 
         Task<Response<TDto>> AddAsync(T entity);
 
-        Task<Response<NoDataDto>> Remove(T entity);
+        Task<Response<NoDataDto>> Remove(int id);
 
-        Task<Response<NoDataDto>> Update(T entity);
+        Task<Response<NoDataDto>> Update(T entity, int id);
     }
 }

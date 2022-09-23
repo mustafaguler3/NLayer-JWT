@@ -4,6 +4,7 @@ using CoreLayer.UnitOfWork;
 using ServiceLayer.Mappings;
 using Shared.Dtos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -37,29 +38,65 @@ namespace ServiceLayer.Services
 			return Response<TDto>.Success(dto, 200);
 		}
 
-		public Task<Response<IQueryable<TDto>>> GetAllAsync()
+		public async Task<Response<IEnumerable<TDto>>> GetAllAsync()
 		{
-			throw new NotImplementedException();
+			var p = ObjectMapper.Mapper.Map<List<TDto>>(await _genericRepository.GetAllAsync());
+
+			return Response<IEnumerable<TDto>>.Success(p,200);
 		}
 
-		public Task<Response<TDto>> GetByIdAsync(int id)
+		public async Task<Response<TDto>> GetByIdAsync(int id)
 		{
-			throw new NotImplementedException();
+			var p = await _genericRepository.GetByIdAsync(id);
+
+			if (p == null)
+			{
+				return Response<TDto>.Fail("id not found", 404, true);
+			}
+
+			return Response<TDto>.Success(ObjectMapper.Mapper.Map<TDto>(p), 200);
 		}
 
-		public Task<Response<NoDataDto>> Remove(T entity)
+		public async Task<Response<NoDataDto>> Remove(int id)
 		{
-			throw new NotImplementedException();
+			var exist = await _genericRepository.GetByIdAsync(id);
+
+			if (exist == null)
+			{
+				return Response<NoDataDto>.Fail("id not found", 404, true);
+			}
+
+			_genericRepository.Remove(exist);
+			await _unitOfWork.CommitAsync();
+
+			return Response<NoDataDto>.Success(ObjectMapper.Mapper.Map<NoDataDto>(exist), 200);
 		}
 
-		public Task<Response<NoDataDto>> Update(T entity)
+		public async Task<Response<NoDataDto>> Update(T entity,int id)
 		{
-			throw new NotImplementedException();
+			var exist = await _genericRepository.GetByIdAsync(id);
+
+			if (exist == null)
+			{
+                return Response<NoDataDto>.Fail("id not found", 404, true);
+            }
+
+			_genericRepository.Update(exist);
+			await _unitOfWork.CommitAsync();
+
+			return Response<NoDataDto>.Success(ObjectMapper.Mapper.Map<NoDataDto>(exist), 204);
 		}
 
-		public Task<Response<IQueryable<TDto>>> Where(Expression<Func<T, bool>> filter)
+		public async Task<Response<IEnumerable<TDto>>> Where(Expression<Func<T, bool>> filter)
 		{
-			throw new NotImplementedException();
+			var p = _genericRepository.Where(filter);
+
+			if (p == null)
+			{
+				return Response<IEnumerable<TDto>>.Fail("not found", 404, true);
+			}
+
+			return Response<IEnumerable<TDto>>.Success(ObjectMapper.Mapper.Map<IEnumerable<TDto>>(await p.ToListAsync()));
 		}
 	}
 }

@@ -11,9 +11,9 @@ namespace CoreLayer.Repositories
 	{
 		Task<T> GetByIdAsync(int id);
 
-		Task<IEnumerable<T>> GetAllAsync();
+		Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> filter=null);
 
-		IQueryable<T> Where(Expression<Func<T, bool>> filter);
+        IEnumerable<T> Where(Expression<Func<T, bool>> filter=null);
 
 		Task AddAsync(T entity);
 

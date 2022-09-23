@@ -1,4 +1,4 @@
-﻿using CoreLayer.Configuration;
+﻿using API.Configuration;
 using CoreLayer.Dtos;
 using CoreLayer.Entities;
 using System;
