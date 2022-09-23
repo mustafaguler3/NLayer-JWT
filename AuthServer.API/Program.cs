@@ -6,6 +6,7 @@ using CoreLayer.UnitOfWork;
 using DataLayer.Data;
 using DataLayer.Repositories;
 using DataLayer.UnitOfWork;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,10 @@ var builder = WebApplication.CreateBuilder(args);
 var tokenOption = new TokenOption();
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(x =>
+{
+	x.RegisterValidatorsFromAssemblyContaining<StartupBase>();
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
