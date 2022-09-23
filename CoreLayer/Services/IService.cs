@@ -18,10 +18,10 @@ namespace CoreLayer.Services
 
         //Task<Response<IQueryable<TDto>>> Where(Expression<Func<T, bool>> filter);
 
-        Task<Response<TDto>> AddAsync(T entity);
+        Task<Response<TDto>> AddAsync(TDto entity);
 
         Task<Response<NoDataDto>> Remove(int id);
 
-        Task<Response<NoDataDto>> Update(T entity, int id);
+        Task<Response<NoDataDto>> Update(TDto entity, int id);
     }
 }

@@ -26,11 +26,12 @@ namespace ServiceLayer.Services
 			_unitOfWork = unitOfWork;
 		}
 
-		public async Task<Response<TDto>> AddAsync(T entity)
+		public async Task<Response<TDto>> AddAsync(TDto entity)
 		{
 			var newEntity = ObjectMapper.Mapper.Map<T>(entity);
 
 			await _genericRepository.AddAsync(newEntity);
+
 			await _unitOfWork.CommitAsync();
 
 			var dto = ObjectMapper.Mapper.Map<TDto>(newEntity);
@@ -72,7 +73,7 @@ namespace ServiceLayer.Services
 			return Response<NoDataDto>.Success(ObjectMapper.Mapper.Map<NoDataDto>(exist), 200);
 		}
 
-		public async Task<Response<NoDataDto>> Update(T entity,int id)
+		public async Task<Response<NoDataDto>> Update(TDto entity,int id)
 		{
 			var exist = await _genericRepository.GetByIdAsync(id);
 
