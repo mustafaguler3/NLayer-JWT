@@ -16,7 +16,7 @@ namespace CoreLayer.Services
 
         Task<Response<IEnumerable<TDto>>> GetAllAsync();
 
-        Task<Response<IQueryable<TDto>>> Where(Expression<Func<T, bool>> filter);
+        //Task<Response<IQueryable<TDto>>> Where(Expression<Func<T, bool>> filter);
 
         Task<Response<TDto>> AddAsync(T entity);
 

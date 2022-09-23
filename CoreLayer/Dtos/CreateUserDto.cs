@@ -14,5 +14,7 @@ namespace CoreLayer.Dtos
 
 		public string Password { get; set; }
 
+		public string City { get; set; }
+
 	}
 }

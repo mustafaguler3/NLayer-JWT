@@ -87,7 +87,7 @@ namespace ServiceLayer.Services
 			return Response<NoDataDto>.Success(ObjectMapper.Mapper.Map<NoDataDto>(exist), 204);
 		}
 
-		public async Task<Response<IEnumerable<TDto>>> Where(Expression<Func<T, bool>> filter)
+		/*public async Task<Response<IEnumerable<TDto>>> Where(Expression<Func<T, bool>> filter)
 		{
 			var p = _genericRepository.Where(filter);
 
@@ -97,6 +97,6 @@ namespace ServiceLayer.Services
 			}
 
 			return Response<IEnumerable<TDto>>.Success(ObjectMapper.Mapper.Map<IEnumerable<TDto>>(await p.ToListAsync()));
-		}
+		} */
 	}
 }

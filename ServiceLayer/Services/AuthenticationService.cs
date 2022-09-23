@@ -1,4 +1,4 @@
-﻿using API.Configuration;
+﻿using CoreLayer.Configuration;
 using CoreLayer.Dtos;
 using CoreLayer.Entities;
 using CoreLayer.Repositories;

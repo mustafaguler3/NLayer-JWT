@@ -1,4 +1,5 @@
 using API.Configuration;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -14,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection("TokenOption"));
 
 builder.Services.Configure<List<Client>>(builder.Configuration.GetSection("Clients"));
+
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

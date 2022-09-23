@@ -19,6 +19,7 @@ namespace DataLayer.Data
 		
 		public DbSet<Product> Products { get; set; }
 
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);

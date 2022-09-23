@@ -1,4 +1,5 @@
-﻿using CoreLayer.Dtos;
+﻿using CoreLayer.Configuration;
+using CoreLayer.Dtos;
 using CoreLayer.Entities;
 using CoreLayer.Services;
 using Microsoft.AspNetCore.Identity;
@@ -26,7 +27,8 @@ namespace ServiceLayer.Services
 			var user = new User()
 			{
 				Email = userDto.Email,
-				UserName = userDto.UserName
+				UserName = userDto.UserName,
+				City = userDto.City
 			};
 
 			var result = await _userManager.CreateAsync(user, userDto.Password);
@@ -54,3 +56,5 @@ namespace ServiceLayer.Services
 		}
 	}
 }
+
+

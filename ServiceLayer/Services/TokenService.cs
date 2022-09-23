@@ -1,8 +1,9 @@
-﻿using API.Configuration;
+﻿using CoreLayer.Configuration;
 using CoreLayer.Dtos;
 using CoreLayer.Entities;
 using CoreLayer.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Configuration;
@@ -23,10 +24,10 @@ namespace ServiceLayer.Services
 		private readonly UserManager<User> _userManager;
 		private readonly TokenOption _tokenOption;
 
-		public TokenService(UserManager<User> userManager, TokenOption tokenOption)
+		public TokenService(UserManager<User> userManager, IOptions<TokenOption> tokenOption)
 		{
 			_userManager = userManager;
-			_tokenOption = tokenOption;
+			_tokenOption = tokenOption.Value;
 		}
 
 		private string CreateRefreshToken()
